@@ -1,0 +1,1 @@
+(()=>{"use strict";modalWindow;const o=new ModalWindow;console.log(o)})();
