@@ -68,11 +68,22 @@ class Slider {
     }
 
     prevSlide(elem, index, strClass) {
-        elem[index].classList.remove(strClass);
+        let slide = elem[index];
+        let content = slide.querySelector('.table');
+        slide.classList.remove(strClass);
+        content.style.visibility = 'hidden'
+        content.style.opacity = 0;
+        
     }
 
     nextSlide(elem, index, strClass) {
-        elem[index].classList.add(strClass);
+        let slide = elem[index];
+        let content = slide.querySelector('.table');
+        slide.classList.add(strClass);
+        content.style.visibility = 'visible'
+        content.style.opacity = 1;
+        
+        
     }
 
     autoPlaySlide() {
