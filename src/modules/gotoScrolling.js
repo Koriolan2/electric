@@ -47,3 +47,5 @@ class GotoScrolling {
 	requestAnimationFrame(fn);
 }
 }
+
+export default GotoScrolling;

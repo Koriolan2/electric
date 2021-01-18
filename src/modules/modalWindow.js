@@ -1,16 +1,11 @@
 'use strict';
 
 class ModalWindow {
-    constructor({
-            modal, 
-            overlay, 
-            openBtn,
-            closeBtn}) 
-            {
+    constructor({modal, overlay, openBtn, closeBtn}) {
         this.modal = document.querySelector(modal);
         this.overlay = document.querySelector(overlay);
         this.openBtn = document.querySelector(openBtn);
-        this.closeBtn = document.querySelector(closeBtn)
+        this.closeBtn = document.querySelector(closeBtn);
     }
 
     init() {
@@ -35,3 +30,5 @@ class ModalWindow {
         // this.modal.classList.add('animate__animated', 'animate__backOutDown');
     }
 }
+
+export default ModalWindow;

@@ -97,3 +97,5 @@ class Slider {
         this.startSlide();
     }
 }
+
+export default Slider;

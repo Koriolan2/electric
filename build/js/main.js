@@ -16,7 +16,17 @@
   \******************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_modalWindow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/modalWindow */ \"./modules/modalWindow.js\");\n/* harmony import */ var _modules_modalWindow__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_modules_modalWindow__WEBPACK_IMPORTED_MODULE_0__);\n\r\n\r\nconst modal = {\r\n    overlay: '.modal-overlay',\r\n    modal: '.modal-callback',\r\n    button: '.callback-btn'\r\n}\r\nconst modalWindow = new ModalWindow(modal);\r\n\r\nmodalWindow.init();\r\n\n\n//# sourceURL=webpack:///./index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_modalWindow_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/modalWindow.js */ \"./modules/modalWindow.js\");\n/* harmony import */ var _modules_gotoScrolling_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/gotoScrolling.js */ \"./modules/gotoScrolling.js\");\n/* harmony import */ var _modules_slider_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/slider.js */ \"./modules/slider.js\");\n\r\n\r\n\r\n\r\n// модальное окно\r\nconst modal = {\r\n    overlay: '.modal-overlay',\r\n    modal: '.modal-callback',\r\n    openBtn: '.header .callback-btn',\r\n    closeBtn: '.modal-close'\r\n};\r\nconst modalWindow = new _modules_modalWindow_js__WEBPACK_IMPORTED_MODULE_0__.default(modal);\r\n\r\nmodalWindow.init();\r\n\r\n// скроллинг\r\nconst goto = {\r\n    menu: '.top-menu'\r\n};\r\n\r\nconst gotoScrolling = new _modules_gotoScrolling_js__WEBPACK_IMPORTED_MODULE_1__.default(goto);\r\n\r\ngotoScrolling.init();\r\n\r\n\r\nconst s = {\r\n    slideWrap: '.top-slider',\r\n    slideElem: '.item'\r\n};\r\n\r\nconst slider = new _modules_slider_js__WEBPACK_IMPORTED_MODULE_2__.default(s);\r\n\r\nslider.init();\r\n\r\n\r\n\n\n//# sourceURL=webpack:///./index.js?");
+
+/***/ }),
+
+/***/ "./modules/gotoScrolling.js":
+/*!**********************************!*\
+  !*** ./modules/gotoScrolling.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n\r\n\r\nclass GotoScrolling {\r\n    constructor({menu}) {\r\n        this.menu = document.querySelector(menu);\r\n\r\n    }\r\n\r\n    init() {\r\n        this.controlEvent();\r\n    }\r\n\r\n    controlEvent() {\r\n        this.menu.addEventListener('click', this.smothNavigate.bind(this));\r\n    }\r\n\r\n    smothNavigate(event) {\r\n        event.preventDefault();\r\n        let target = event.target;\r\n        let targetBlockName = target.getAttribute('href');\r\n        let targetBlock = document.querySelector(''+targetBlockName);\r\n        let coordinate = targetBlock.getBoundingClientRect().y;\r\n        console.log(coordinate);\r\n\r\n        scroll (targetBlock , coordinate);\r\n    }\r\n\r\n    scroll(el, direction) {\r\n\t\tlet duration = 2000,\r\n\t\t    start = new Date().getTime();\r\n \r\n\t    let fn = function() {\r\n\t\t\r\n\t\tlet top = el.getBoundingClientRect().top - 96,\r\n\t\t    now = new Date().getTime() - start,\r\n\t\t    result = Math.round(top * now / duration);\r\n        \r\n            result = (result > direction * top) ? top : (result == 0) ? direction : result;\r\n         if (direction * top > 0) {\r\n\t\t\t\r\n\t\t\twindow.scrollBy(0,result);\r\n\t\t\t\r\n\t\t\trequestAnimationFrame(fn);\r\n\t\t}\r\n\t}\r\n\t\r\n\trequestAnimationFrame(fn);\r\n}\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (GotoScrolling);\n\n//# sourceURL=webpack:///./modules/gotoScrolling.js?");
 
 /***/ }),
 
@@ -24,9 +34,19 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _mod
 /*!********************************!*\
   !*** ./modules/modalWindow.js ***!
   \********************************/
-/***/ ((module) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("\r\n\r\nclass ModalWindow {\r\n    constructor({modal, overlay, button}) {\r\n        this.modal = document.querySelector(modal);\r\n        this.overlay = document.querySelector(overlay);\r\n        this.button = document.querySelector(button);\r\n    }\r\n\r\n    init() {\r\n        this.controlButtons();\r\n    }\r\n\r\n    controlButtons() {\r\n        this.button.addEventListener('click', this.openModal.bind(this));\r\n    }\r\n\r\n    openModal(event) {\r\n        event.preventDefault();\r\n        alert('test');        \r\n    }\r\n}\r\n\r\nmodule.exports = ModalWindow;\n\n//# sourceURL=webpack:///./modules/modalWindow.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n\r\n\r\nclass ModalWindow {\r\n    constructor({modal, overlay, openBtn, closeBtn}) {\r\n        this.modal = document.querySelector(modal);\r\n        this.overlay = document.querySelector(overlay);\r\n        this.openBtn = document.querySelector(openBtn);\r\n        this.closeBtn = document.querySelector(closeBtn);\r\n    }\r\n\r\n    init() {\r\n        this.controlButtons();        \r\n    }\r\n\r\n    controlButtons() {\r\n        this.openBtn.addEventListener('click', this.openModal.bind(this));\r\n        this.overlay.addEventListener('click', this.closeModal.bind(this));\r\n        this.closeBtn.addEventListener('click', this.closeModal.bind(this));\r\n    }\r\n\r\n    openModal() {\r\n       this.overlay.style.display = 'block'; \r\n       this.modal.style.display = 'block'; \r\n    //    this.modal.classList.add('animate__animated', 'animate__backInDown');\r\n    }\r\n\r\n    closeModal() {\r\n        this.overlay.style.display = 'none';\r\n        this.modal.style.display = 'none';  \r\n        // this.modal.classList.add('animate__animated', 'animate__backOutDown');\r\n    }\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ModalWindow);\r\n\n\n//# sourceURL=webpack:///./modules/modalWindow.js?");
+
+/***/ }),
+
+/***/ "./modules/slider.js":
+/*!***************************!*\
+  !*** ./modules/slider.js ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n\r\n\r\nclass Slider {\r\n    constructor({slideWrap, slideElem}) {\r\n        this.slideWrap = document.querySelector(slideWrap);\r\n        this.slideElem = this.slideWrap.querySelectorAll(slideElem);\r\n        this.dots;\r\n        this.currentSlide = 0;\r\n        this.slideCount = this.slideElem.length;\r\n    }\r\n\r\n    renderDots() {\r\n        const ul = document.createElement('ul');\r\n        ul.classList.add('slider__dots');\r\n\r\n        for(let i = 0; i < this.slideCount; i++) {\r\n            let li = document.createElement('li');\r\n            li.classList.add('dot');\r\n            ul.append(li);\r\n        }\r\n\r\n        this.slideWrap.append(ul);\r\n\r\n        this.dots = document.querySelectorAll('.dot');\r\n    }\r\n    renderSlides() {\r\n        this.slideElem.forEach((elem) => {\r\n            elem.classList.add('slide__hidden');\r\n        });\r\n        this.slideElem[this.currentSlide].classList.remove('slide__hidden');\r\n        this.slideElem[this.currentSlide].classList.add('slide__visible');\r\n    }\r\n\r\n    sliderStyles() {\r\n        const st = document.createElement('style');\r\n        const sliderStyles = `\r\n            .slider__dots {\r\n                position:absolute;\r\n                bottom:15px;\r\n                left:0;\r\n                right:0;\r\n                display:flex;\r\n                justify-content:center;\r\n                z-index: 10000;\r\n            }\r\n            .dot {\r\n                width:25px;\r\n                height:25px;\r\n                border-radius:50%;\r\n                background-color: rgba(0,0,0,0.6);\r\n                margin: 5px;\r\n                cursor:pointer;\r\n                transition: background-color 0.3s;\r\n                border: 4px solid #e9bb26;\r\n            }\r\n            .dot:hover {\r\n                background-color: rgba(255,255,255,1);\r\n            }\r\n            .item {\r\n                display:none!important;\r\n            }\r\n            .slide__visible {\r\n                display:block!important;\r\n            }\r\n        `;\r\n        st.textContent = sliderStyles;\r\n        document.head.append(st);\r\n    }\r\n\r\n    prevSlide(elem, index, strClass) {\r\n        elem[index].classList.remove(strClass);\r\n    }\r\n\r\n    nextSlide(elem, index, strClass) {\r\n        elem[index].classList.add(strClass);\r\n    }\r\n\r\n    autoPlaySlide() {\r\n        this.prevSlide(this.slideElem, this.currentSlide, 'slide__visible')\r\n        this.currentSlide++;\r\n        if (this.currentSlide >= this.slideCount) {\r\n            this.currentSlide = 0;\r\n        }\r\n        this.nextSlide(this.slideElem, this.currentSlide, 'slide__visible')   \r\n    }\r\n\r\n    startSlide() {\r\n        setInterval(this.autoPlaySlide.bind(this), 3000);\r\n    }\r\n\r\n    stopSlide() {}\r\n\r\n    init() {\r\n        \r\n        this.sliderStyles();\r\n        this.renderDots();\r\n        this.startSlide();\r\n    }\r\n}\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Slider);\n\n//# sourceURL=webpack:///./modules/slider.js?");
 
 /***/ })
 
@@ -56,18 +76,6 @@ eval("\r\n\r\nclass ModalWindow {\r\n    constructor({modal, overlay, button}) {
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => module['default'] :
-/******/ 				() => module;
-/******/ 			__webpack_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
