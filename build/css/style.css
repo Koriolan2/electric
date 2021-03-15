@@ -286,7 +286,8 @@ a.absolute {
 	position: fixed;
 	top: 20%;
 	left: 50%;
-	transform: translateX(-50%);
+	/* transform: translateX(-50%); */
+	margin-left: -230px;
 	width: 460px;
 	max-width: 100%;
 	background: #fff;
